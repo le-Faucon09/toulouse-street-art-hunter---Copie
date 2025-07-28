@@ -49,7 +49,7 @@ class UsersRepository {
     );
 
     // Return the first row of the result, which represents the user
-    return (rows as User[])[0] ?? null;
+    return rows as User[];
   }
 
   async readByEmailWithPassword(email: string) {

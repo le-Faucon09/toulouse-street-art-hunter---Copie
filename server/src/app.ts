@@ -13,13 +13,16 @@ if (process.env.CLIENT_URL != null) {
   app.use(cors({ origin: [process.env.CLIENT_URL] }));
 }
 
-//app.use(express.json());
+app.use(express.json());
 
 const publicFolderPath = path.join(__dirname, "../../server/public");
 
 if (fs.existsSync(publicFolderPath)) {
   app.use(express.static(publicFolderPath));
 }
+
+import router from "./router";
+app.use(router);
 
 import discoveredRouter from "./modules/discovered/discoveredRouter";
 app.use("/api/discovered", discoveredRouter);

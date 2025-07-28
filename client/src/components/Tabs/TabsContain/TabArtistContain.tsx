@@ -13,7 +13,7 @@ export default function TabArtist() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/artists`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/artist`)
       .then((res) => res.json())
       .then((data) => {
         setArtists(data);

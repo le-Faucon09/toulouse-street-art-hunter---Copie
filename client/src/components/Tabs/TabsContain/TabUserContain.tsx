@@ -17,7 +17,7 @@ export default function TabUser() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/user`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/users`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
