@@ -1,86 +1,108 @@
-.capture-page {
-  min-height: 100vh;
-  width: 100%;
-  background-image: url("../images/1febdd3f-7c7e-487f-9b89-721115ed8eb5.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* Empêche tout défilement */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+.chasse-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 80px 20px 120px;
-}
-
-.capture-page h1 {
-  font-family: "RetroGaming", monospace;
-  color: #40e0d0;
-  font-size: 3rem;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  padding: 2rem;
   text-align: center;
-  margin-bottom: 20px;
+  font-family: "RetroGaming", monospace;
 }
 
-.capture-page .video-container {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  margin-bottom: 20px;
+.chasse-title {
+  position: absolute;
+  left:2rem;
+  top: 10%;
+  color: #40e0d0;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  transform: translateY(50%) rotate(.90deg);
+  transform-origin: left top;
+  animation: fadeIn 1.5s forwards;
 }
 
-.capture-page video {
-  width: 100%;
-  height: auto;
-  display: block;
+/* 💡 Cadre et effet lumineux sur la caméra */
+.video-preview {
+  width: 80%;
+  max-width: 600px;
+  border: 3px solid #40e0d0;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(64, 224, 208, 0.6);
+  filter: brightness(1.2) contrast(1.1);
+  object-fit: cover;
 }
 
-.capture-page .capture-button {
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  border: none;
+/* 📸 Bouton capture stylé */
+.capture-button {
+  font-family: "RetroGaming", monospace;
   background-color: #ff8000;
+  color: white;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 9999px;
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  transition: transform 0.2s, background-color 0.3s;
 }
 
-.capture-page .capture-button:hover {
-  background-color: orange;
-  box-shadow: 0 0 15px red, 0 0 5px red inset;
+.capture-button:hover {
+  transform: scale(1.1);
+  background-color: #ffa500;
 }
 
-.capture-page .captured-image {
-  margin-top: 20px;
-  max-width: 100%;
+/* 🎇 Flash blanc rapide lors de la capture */
+.flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  opacity: 0;
+  animation: flashEffect 0.4s ease-out;
+  pointer-events: none;
+}
+
+@keyframes flashEffect {
+  0% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+/* 🖼️ Zone de prévisualisation */
+.photo-preview {
+  margin-top: 2rem;
+  animation: fadeIn 1.5s forwards;
+}
+
+.captured-image {
+  width: 80%;
+  max-width: 400px;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-top: 1rem;
+  box-shadow: 0 0 20px rgba(255, 128, 0, 0.4);
 }
 
-/* RESPONSIVE */
-
-@media screen and (max-width: 768px) {
-  .capture-page h1 {
-    font-size: 2rem;
-  }
-
-  .capture-page .capture-button {
-    width: 60px;
-    height: 60px;
-  }
+/* 💬 Statut d’envoi */
+.upload-status {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #333;
+  animation: fadeIn 1.5s forwards;
 }
 
-@media screen and (min-width: 769px) {
-  .capture-page h1 {
-    font-size: 3rem;
-  }
-
-  .capture-page .capture-button {
-    width: 80px;
-    height: 80px;
-  }
+/* Animation douce d’apparition */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

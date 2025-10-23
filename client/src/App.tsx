@@ -6,11 +6,14 @@ import Navigation from "./components/navigation.tsx";
 function App() {
   return (
     <>
-      <Navigation />
-      <Outlet />
-      <Footer />
+        <Navigation/>
+
+        <Outlet />
+
+        <Footer />
     </>
   );
 }
 
 export default App;
+

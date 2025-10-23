@@ -12,7 +12,7 @@ import Erreur from "./pages/Erreur";
 import Instructions from "./pages/Instructions";
 import MapComponent from "./pages/MapComponent";
 import MentionsLegales from "./pages/MentionsLegales";
-import Accueil from "./pages/accueil";
+import Accueil from "./pages/accueil.tsx";
 import Administrateur from "./pages/administrateur/administrateur.tsx";
 import Classement from "./pages/classement";
 import Gallerie from "./pages/gallerie";
@@ -26,6 +26,12 @@ const router = createBrowserRouter([
         path: "/",
         element: <Accueil />,
       },
+       
+      {
+      path: "/Chasse",
+      element: <Chasse />
+      },
+
       {
         path: "/administrateur",
         element: <Administrateur />,

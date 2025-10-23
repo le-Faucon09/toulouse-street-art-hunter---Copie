@@ -43,6 +43,7 @@ function Connexion() {
   };
 
   return (
+    <>
     <main className="connexion-container">
       {isLoggedIn ? (
         <div className="welcom-message">
@@ -52,10 +53,12 @@ function Connexion() {
             type="button"
             onClick={handleLogout}
           >
-            Deconnection
+            Deconnexion
           </button>
         </div>
       ) : (
+        <>
+        <h2>Connexion</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="email">Email</label>
           <input {...register("email")} type="email" id="email" required />
@@ -77,8 +80,10 @@ function Connexion() {
             </button>
           </div>
         </form>
+        </>
       )}
     </main>
+    </>
   );
 }
 

@@ -45,6 +45,7 @@ function inscription() {
   } = useForm<FormData>({
     resolver: yupResolver(validationSchema),
   });
+
   const onSubmit = async (data: FormData) => {
     /*alert(`Bienvenue ${data.pseudo} ! votre email : ${data.email}`);*/
 
@@ -83,6 +84,7 @@ function inscription() {
     reset();
   };
   return (
+    <>
     <main className="inscription-container">
       <h2>Inscription</h2>
 
@@ -97,7 +99,7 @@ function inscription() {
           aria-describedby="pseudo_help"
         />
         {errors.pseudo && <p className="form-error">{errors.pseudo.message}</p>}
-        <p id="pseudo_help">Votre pseudo doit faire 4 caractères min.</p>
+        {/*<p id="pseudo_help">Votre pseudo doit faire 4 caractères min.</p>*/}
 
         <label htmlFor="nom">Nom</label>
         <input
@@ -164,6 +166,7 @@ function inscription() {
         </div>
       </form>
     </main>
+    </>
   );
 }
 

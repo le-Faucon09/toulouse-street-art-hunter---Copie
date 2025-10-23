@@ -1,54 +1,132 @@
-.inscription-container {
-  max-width: 500px;
-  margin: auto 40%;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+ html,
+body {
+ margin: 0;
+  padding: 0;
+ height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f5f6fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-form {
+/* --- CONTENEUR DU FORMULAIRE --- */
+main.inscription-container {
+  width: 400px;              /* un peu plus étroit */
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;        /* ↓ padding réduit */
   display: flex;
   flex-direction: column;
+  gap: 14px;                 /* ↓ moins d’espace entre sections */
+  
 }
 
+/* --- TITRE --- */
+h2 {
+  text-align: center;
+  font-size: 18px;           /* ↓ police réduite */
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* --- FORMULAIRE --- */
+form {
+  display: flex;
+  
+  gap: 8px;                  /* ↓ écart réduit entre champs */
+}
+
+/* Ligne label + input */
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;                 /* ↓ écart horizontal réduit */
+  margin-bottom: 4px;        /* ↓ moins d’espace entre lignes */
+}
+
+/* --- LABEL --- */
 label {
-  margin-top: 15px;
-  font-weight: bold;
+  width: 110px;              /* ↓ plus étroit */
+  font-weight: 600;
+  color: #444;
+  font-size: 13px;
 }
 
-input {
-  margin-top: 5px;
-  padding: 10px;
+/* --- INPUT --- */
+input#pseudo,
+input#nom,
+input#prenom,
+input#email,
+input#password,
+input#confirm_password {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 13px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 5px;
+  width: 360px;
 }
 
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* --- MESSAGE D’ERREUR --- */
 .form-error {
   color: red;
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 12px;
+  margin-left: 125px;        /* aligné avec input */
+  margin-top: -4px;          /* ↓ réduit l’espacement vertical */
 }
 
+/* --- BOUTON --- */
 #btn-valide {
-  margin-top: 20px;
-  padding: 12px;
-  font-size: 16px;
+  align-self: center;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
+  padding: 8px 16px;         /* ↓ hauteur réduite */
+  font-size: 13px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #btn-valide:hover {
   background-color: #0056b3;
+  transform: translateY(-1px);
 }
 
-@media screen and (max-width: 768px) {
-  main {
-    width: 300px;
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow: auto; /* autorise le scroll sur mobile */
+  }
+
+
+  .form-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  label {
+    text-align: left;
+    width: 100%;
+  }
+
+  .form-error {
+    margin-left: 0;
+  }
+
+  #btn-valide {
+    width: 100%;
   }
 }
+
+
