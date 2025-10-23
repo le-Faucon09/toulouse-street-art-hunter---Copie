@@ -1,37 +1,53 @@
-.mobileTabs {
+.mobile-tabs {
   display: flex;
-  flex-direction: row;
-  background-color: white;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100vw;
-  z-index: 100;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0.5rem 0;
-}
-.mobileTabs button {
-  background: white;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.mobileTabs img {
-  margin-right: 8px;
-  width: 1rem;
-  height: auto;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
 }
 
-@media screen and (min-width: 812px) {
-  .mobileTabs {
-    display: none;
+.mobile-tab-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-tab-btn:hover {
+  background: linear-gradient(90deg, #ff0066, #ffcc00);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+}
+
+.mobile-tab-btn:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 3px;
+}
+
+.mobile-tab-btn img {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+}
+
+@media (max-width: 480px) {
+  .mobile-tab-btn img {
+    width: 32px;
+    height: 32px;
   }
 }
-@media screen and (max-width: 812px) {
-  .footer {
-    display: none;
-  }
+
+.mobile-tab-btn.active {
+  background: linear-gradient(90deg, #ffcc00, #ff0066);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+  border-color: #ffcc00;
 }
+
+.mobile-tab-btn.active {
+  animation: pulse 1.2s infinite;
+}
+

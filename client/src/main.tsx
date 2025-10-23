@@ -13,7 +13,7 @@ import Instructions from "./pages/Instructions";
 import MapComponent from "./pages/MapComponent";
 import MentionsLegales from "./pages/MentionsLegales";
 import Accueil from "./pages/accueil.tsx";
-import Administrateur from "./pages/administrateur/administrateur.tsx";
+import Administrateur from "./pages/administrateur/Administrateur.tsx";
 import Classement from "./pages/classement";
 import Gallerie from "./pages/gallerie";
 import Info from "./pages/info";

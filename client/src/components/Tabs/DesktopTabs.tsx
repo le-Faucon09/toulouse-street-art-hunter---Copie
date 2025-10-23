@@ -1,27 +1,30 @@
 import { useState } from "react";
-import tabsData from "../../data/tabsData.tsx";
+import tabsData, {TabData} from "../../data/tabsData.tsx";
 import "./DesktopTabs.css";
 import Modal from "./Modal.tsx";
 
 function DesktopTabs() {
-  const [selectedTabid, setSelectedTabId] = useState<number | null>(null);
+  const [selectedTabId, setSelectedTabId] = useState<number | null>(null);
 
   return (
-    <div className="desktopTabs">
-      {tabsData.map((obj, index) => (
+    <div className="desktop-tabs">
+      {tabsData.map((tab: TabData) => (
         <button
-          key={obj.id}
+          key={tab.id}
           type="button"
-          onClick={() => setSelectedTabId(obj.id)}
+          className={`desktop-tab-btn ${selectedTabId === tab.id ? "active" : ""}`}
+          onClick={() => setSelectedTabId(tab.id)}
+          aria-label={`Ouvrir ${tab.title}`}
         >
           <div>
-            <img src={obj.icon} alt="" />
-            <span>{tabsData[index].tabTitle}</span>
+            <img src={tab.icon} alt={tab.title} />
+            <span>{tab.title}</span>
           </div>
         </button>
       ))}
-      {selectedTabid !== null && (
-        <Modal tabId={selectedTabid} onClose={() => setSelectedTabId(null)} />
+      
+      {selectedTabId !== null && (
+        <Modal tabId={selectedTabId} onClose={() => setSelectedTabId(null)} />
       )}
     </div>
   );

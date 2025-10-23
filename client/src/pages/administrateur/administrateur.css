@@ -7,3 +7,23 @@
   background-repeat: no-repeat;
   text-align: center;
 }
+
+/* Affiche uniquement sur mobile */
+.mobile-only {
+  display: block;
+}
+
+.desktop-only {
+  display: none;
+}
+
+/* --- Desktop version --- */
+@media (min-width: 813px) {
+  .mobile-only {
+    display: none;
+  }
+
+  .desktop-only {
+    display: block;
+  }
+}

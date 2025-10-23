@@ -1,28 +1,31 @@
 import { useState } from "react";
-import tabsData from "../../data/tabsData.tsx";
+import tabsData, {TabData} from "../../data/tabsData";
 import "./MobileTabs.css";
 import Modal from "./Modal.tsx";
 
 function MobileTabs() {
-  const [selectedTabid, setSelectedTabId] = useState<number | null>(null);
+  const [selectedTabId, setSelectedTabId] = useState<number | null>(null);
 
   return (
-    <div className="mobileTabs">
-      {tabsData.map((obj) => (
+    <div className="mobile-tabs">
+      {tabsData.map((tab: TabData) => (
         <button
-          key={obj.id}
+          key={tab.id}
           type="button"
-          onClick={() => setSelectedTabId(obj.id)}
+          className="mobile-tab-btn"
+          onClick={() => setSelectedTabId(tab.id)}
+          aria-label={`Ouvrir ${tab.title || "un onglet"}`}
         >
-          <img src={obj.icon} alt="" />
+          <img src={tab.icon} alt={tab.title || "Icône"} />
         </button>
       ))}
 
-      {selectedTabid !== null && (
-        <Modal tabId={selectedTabid} onClose={() => setSelectedTabId(null)} />
+      {selectedTabId !== null && (
+        <Modal tabId={selectedTabId} onClose={() => setSelectedTabId(null)} />
       )}
     </div>
   );
 }
 
 export default MobileTabs;
+

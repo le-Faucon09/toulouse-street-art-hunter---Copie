@@ -17,10 +17,10 @@ export default function Modal({
     <dialog open className="modalBase">
       {tab && (
         <>
-          <div className="tabTitle">{tab.tabTitle}</div>
+          <div className="tabTitle">{tab.title}</div>
           <div className="tabContainArray">
-            {tab.tabTitle === "Utilisateurs" && <TabUserContain />}
-            {tab.tabTitle === "Artistes" && <TabArtistContain />}
+            {tab.title === "Utilisateurs" && <TabUserContain />}
+            {tab.title === "Artistes" && <TabArtistContain />}
           </div>
         </>
       )}

@@ -11,11 +11,11 @@ const validationSchema = yup.object({
     .min(2, "Un minimum de 2 caractères est demandé"),
   first_name: yup
     .string()
-    .required("Il faut préciser votre nom")
+    .required("Il faut préciser votre prénom")
     .min(4, "Un minimum de 4 caractères est demandé"),
   last_name: yup
     .string()
-    .required("Il faut préciser votre prénom")
+    .required("Il faut préciser votre nom")
     .min(4, "Un minimum de 4 caractères est demandé !"),
   email: yup
     .string()

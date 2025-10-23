@@ -1,39 +1,65 @@
-.desktopTabs {
+.desktop-tabs {
   display: flex;
-  flex-direction: row;
-  gap: 4rem;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  padding: 8px;
-  background: rgb(255, 128, 0);
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
 }
 
-.desktopTabs button {
-  background: transparent;
+/* --- BOUTONS --- */
+.desktop-tabs button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 0.8rem 1.5rem;
   color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
   font-size: 1rem;
-}
-
-.desktopTabs div {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
   align-items: center;
+  gap: 10px;
 }
 
-.desktopTabs img {
-  margin-right: 8px;
-  width: 1rem;
-  height: auto;
+.desktop-tabs button:hover {
+  background: linear-gradient(90deg, #ff0066, #ffcc00);
+  color: #1b1b1b;
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
 }
 
-.desktopTabs button:hover {
-  background: black;
-  border-radius: 4px;
+/* --- BOUTON ACTIF --- */
+.desktop-tabs button.active {
+  background: linear-gradient(90deg, #ffcc00, #ff0066);
+  color: #1b1b1b;
+  box-shadow: 0 0 25px rgba(255, 204, 0, 0.8);
+  transform: scale(1.05);
 }
 
+/* --- ICÔNES --- */
+.desktop-tabs img {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+  transition: transform 0.2s ease;
+}
+
+.desktop-tabs button:hover img {
+  transform: rotate(8deg) scale(1.1);
+}
+
+/* --- RESPONSIVE --- */
 @media screen and (max-width: 812px) {
-  .desktopTabs {
+  .desktop-tabs {
     display: none;
   }
 }
