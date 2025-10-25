@@ -1,17 +1,17 @@
+/* Ta fenêtre de connexion */
 .connexion-container {
-  position: fixed;          /* clé : reste toujours à l'écran */
-  top: 50%;                 /* centre vertical */
-  left: 50%;                /* centre horizontal */
-  transform: translate(-50%, -50%); /* ajuste pour le vrai centre */
+  position: relative; /* plus besoin de fixed ici */
+  width: 400px;
   padding: 30px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #ffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
-  z-index: 9999;        
+  z-index: 10000; /* au-dessus du fond sombre */
+  animation: fadeIn 0.4s ease forwards;
 }
+
 
 .btn-deconnection {
   color: black;

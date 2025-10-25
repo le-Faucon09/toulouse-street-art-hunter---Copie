@@ -28,20 +28,25 @@ function getDistanceInKm(
 }
 
 export default function ArtworkList({ userLatitude, userLongitude }: Props) {
-  const nearbyArtworks = mockArtworks.filter((artwork: Artwork) => {
+    const artworksWithDistance = mockArtworks.map((artwork: Artwork) => {
     const distance = getDistanceInKm(
       userLatitude,
       userLongitude,
       artwork.latitude,
       artwork.longitude,
     );
-    return distance <= 30;
+    
+    return {...artwork,  distance };
   });
+
+  const nearbyArtworks = artworksWithDistance
+  .filter((art) => art.distance <=30)
+  .sort((a, b) => a.distance - b.distance);
 
   return (
     <div className="artwork-list">
       {nearbyArtworks.length === 0 && <p>Aucune oeuvre à proximité.</p>}
-      {nearbyArtworks.map((artwork: Artwork) => (
+      {nearbyArtworks.map((artwork) => (
         <ArtworkCard key={artwork.id} artwork={artwork} />
       ))}
     </div>

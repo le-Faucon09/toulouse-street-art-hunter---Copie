@@ -17,6 +17,7 @@ body {
 /* --- CONTENEUR DU FORMULAIRE --- */
 main.inscription-container {
   width: 420px;
+  height: 690px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   border-radius: 20px;
@@ -27,6 +28,12 @@ main.inscription-container {
   flex-direction: column;
   gap: 14px;
   border: 2px solid rgba(255, 255, 255, 0.15);
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 /* --- TITRE --- */

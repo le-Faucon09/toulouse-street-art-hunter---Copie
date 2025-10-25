@@ -23,7 +23,9 @@ export default function MapComponent() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showNearbyArtworks, setShowNearbyArtworks] = useState(false);
-
+  const [artworks, setArtworks] = useState< 
+  { id: number; name: string; lat: number; lon: number }[]
+   >([]);
   const handleGeolocation = () => {
     if (navigator.geolocation) {
       setLoading(true);
@@ -76,6 +78,15 @@ export default function MapComponent() {
                 </Marker>
               </>
             )}
+
+            {/* 👇 Ici les marqueurs d'œuvres */}
+            {artworks.map((art) => (
+              <Marker key={art.id} position={[art.lat, art.lon]} icon={defaultIcon}>
+                <Popup>
+                  <strong>{art.name}</strong>
+                </Popup>
+              </Marker>
+            ))}
           </MapContainer>
 
           <div className="map-buttons">
