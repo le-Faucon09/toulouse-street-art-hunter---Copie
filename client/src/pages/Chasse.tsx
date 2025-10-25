@@ -34,14 +34,19 @@ export default function Chasse() {
   }, []);
 
   const savePhotoLocally = (photoData: string) => {
-    const existingPhotos = JSON.parse(localStorage.getItem("userPhotos") || "[]");
+    const existingPhotos = JSON.parse(localStorage.getItem("galleryPhotos") || "[]");
     existingPhotos.push({
       photo: photoData,
       date: new Date().toISOString(),
-      user: "user_3",
+      user: "user_3", 
     });
-    localStorage.setItem("userPhotos", JSON.stringify(existingPhotos));
+    localStorage.setItem("galleryPhotos", JSON.stringify(existingPhotos));
+    
+    // 🔔 avertit la galerie qu'une nouvelle photo a été ajoutée
+    window.dispatchEvent(new Event("galleryUpdate"))
   };
+
+ 
 
   const sendPhotoToBackend = async (blob: Blob) => {
     try {

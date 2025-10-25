@@ -36,8 +36,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "list": "^2.0.19",
     "multer": "^2.0.1",
-    "mysql2": "^3.14.0"
+    "mysql2": "^3.14.0",
+    "npm": "^11.6.2",
+    "react-leaflet": "^5.0.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.6.0",

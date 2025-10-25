@@ -16,7 +16,7 @@ const navigate = useNavigate();
 
     setTimeout(() => {
       navigate("/chasse");
-    }, 1500);
+    }, 4000);
   };
 
   return (

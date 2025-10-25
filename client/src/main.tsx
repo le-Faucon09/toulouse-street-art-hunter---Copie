@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import "./assets/styles/global.css";
 import App from "./App";
-import Connexion from "./pages/Auth/connexion.tsx";
+import Connexion from "./pages/Auth/Connexion.tsx";
 import Inscription from "./pages/Auth/inscription.tsx";
 import CGU from "./pages/Cgu";
 import Chasse from "./pages/Chasse";
@@ -12,11 +12,11 @@ import Erreur from "./pages/Erreur";
 import Instructions from "./pages/Instructions";
 import MapComponent from "./pages/MapComponent";
 import MentionsLegales from "./pages/MentionsLegales";
-import Accueil from "./pages/accueil.tsx";
+import Accueil from "./pages/Accueil.tsx";
 import Administrateur from "./pages/administrateur/Administrateur.tsx";
 import Classement from "./pages/classement";
-import Gallerie from "./pages/gallerie";
-import Info from "./pages/info";
+import Gallerie from "./pages/Gallerie.tsx";
+import Info from "./pages/Infos.tsx";
 
 const router = createBrowserRouter([
   {

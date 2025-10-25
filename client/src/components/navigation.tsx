@@ -111,7 +111,7 @@ function Navigation() {
                 }}
                 to="/infos"
               >
-                informations
+              informations
               </Link>
             </li>
             <li>

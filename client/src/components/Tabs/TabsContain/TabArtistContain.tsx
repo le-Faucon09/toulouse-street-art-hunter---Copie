@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import "./TabArtistContain.css";
 
 type Artist = {
   id: number;
@@ -8,14 +9,14 @@ type Artist = {
   created_at?: Date;
 };
 
-export default function TabArtist() {
+export default function TabArtistContain() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // --- Camera ---
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [photoTaken, setPhotoTaken] = useState<string | null>(null);
+  const [photos, setPhotos] = useState<string[]>([]);
+  const [isCameraOn, setIsCameraOn] = useState(false);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/artist`)
@@ -26,28 +27,43 @@ export default function TabArtist() {
       });
   }, []);
 
-  // --- Active la caméra ---
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        setIsCameraOn(true);
       }
     } catch (err) {
-      console.error("Erreur d’accès à la caméra :", err);
+      console.error("Erreur d'accès à la caméra :", err);
       alert("Impossible d'accéder à la caméra. Vérifie les permissions.");
     }
   };
 
-  // --- Capture une photo ---
   const takePhoto = () => {
     if (videoRef.current && canvasRef.current) {
       const ctx = canvasRef.current.getContext("2d");
       if (!ctx) return;
       ctx.drawImage(videoRef.current, 0, 0, 320, 240);
       const image = canvasRef.current.toDataURL("image/png");
-      setPhotoTaken(image);
-    }
+
+      // Ajoute la photo à l'état local
+      setPhotos((prev) => {
+        const newPhotos = [...prev, image];
+
+         // Enregistre dans 
+        localStorage.setItem("galleryPhotos", JSON.stringify(newPhotos))
+
+        window.dispatchEvent(new Event("galleryUpdate"));
+
+        return newPhotos;
+    });
+  }
+  };
+
+  const clearPhotos = () => {
+    setPhotos([]);
+    localStorage.removeItem("galleryPhotos");
   };
 
   if (loading) return <p>Chargement des artistes en cours...</p>;
@@ -56,7 +72,7 @@ export default function TabArtist() {
     <div>
       <h3>Les artistes de Street Art Hunter</h3>
 
-      {/* ---- TABLEAU DES ARTISTES ---- */}
+      {/* ---- TABLEAU ---- */}
       <table>
         <caption>Liste des artistes</caption>
         <thead>
@@ -96,45 +112,61 @@ export default function TabArtist() {
       </table>
 
       {/* ---- MODULE PHOTO ---- */}
-      <div style={{ marginTop: "2rem" }}>
-        <h4>📸 Ajouter une photo d’artiste</h4>
+      <div className="photo-container">
+        {/* --- Galerie à gauche --- */}
+        <div className="gallery-section">
+          <h4>🎨 Capture ton œuvre</h4>
 
-        {!photoTaken ? (
-          <>
+          {photos.length === 0 ? (
+            <p>Aucune photo capturée pour le moment.</p>
+          ) : (
+            photos.map((photo, index) => (
+              <img
+                key={index}
+                src={photo}
+                alt={`photo ${index + 1}`}
+                className="captured-image"
+              />
+            ))
+          )}
+        </div>
+
+        {/* --- Caméra à droite --- */}
+        <div className="camera-section">
+          <h4>📸 Prendre une photo</h4>
+
+          {isCameraOn ? (
             <video ref={videoRef} width="320" height="240" autoPlay muted />
-            <div style={{ marginTop: "10px" }}>
+          ) : (
+            <p>🎥 Caméra non activée</p>
+          )}
+
+          <div className="camera-buttons">
+            {!isCameraOn && (
               <button type="button" onClick={startCamera}>
                 Activer la caméra
               </button>
+            )}
+            {isCameraOn && (
               <button type="button" onClick={takePhoto}>
                 Prendre une photo
               </button>
-            </div>
-            <canvas
-              ref={canvasRef}
-              width="320"
-              height="240"
-              style={{ display: "none" }}
-            />
-          </>
-        ) : (
-          <>
-            <img
-              src={photoTaken}
-              alt="Photo capturée"
-              width="320"
-              height="240"
-            />
-            <div>
-              <button type="button" onClick={() => setPhotoTaken(null)}>
-                Reprendre une photo
+            )}
+            {photos.length > 0 && (
+              <button type="button" onClick={clearPhotos}>
+                🗑️ Supprimer toutes les photos
               </button>
-              {/* TODO : ici tu pourras envoyer la photo au serveur */}
-            </div>
-          </>
-        )}
+            )}
+          </div>
+
+          <canvas
+            ref={canvasRef}
+            width="320"
+            height="240"
+            style={{ display: "none" }}
+          />
+        </div>
       </div>
     </div>
   );
 }
-

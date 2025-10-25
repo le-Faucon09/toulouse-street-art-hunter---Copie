@@ -1,0 +1,35 @@
+.gallerie-container {
+  padding: 80px 20px;
+  min-height: 75vh;
+  min-width: 100vw;
+  background-color: #0a0a0a;
+  color: white;
+  text-align: center;
+}
+
+h2 {
+  font-family: "Urbanist", sans-serif;
+  font-size: 28px;
+  color: #ffcc00;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.gallerie-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gallerie-content img {
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.gallerie-content img:hover {
+  transform: scale(1.05);
+}
