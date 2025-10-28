@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -18,9 +19,20 @@ const validationSchema = yup.object({
 
 type FormData = yup.InferType<typeof validationSchema>;
 
-function Connexion() {
+export default function Connexion() {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+useEffect(() => {
+  const storedUser = localStorage.getItem("user");
+  if (storedUser) {
+    const user = JSON.parse(storedUser);
+    setIsLoggedIn(true);
+    setUserEmail(user.email);
+  }
+}, [])
 
   const {
     register,
@@ -31,15 +43,49 @@ function Connexion() {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: FormData) => {
-    setIsLoggedIn(true);
-    setUserEmail(data.email);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch(
+        `${apiUrl}/api/users/login`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", result.token)
+        localStorage.setItem("user", JSON.stringify(result.user));
+
+        alert(`Bienvenue ${result.user.pseudo} !`);
+        navigate("/profil");
+         setIsLoggedIn(true);
+         setUserEmail(result.user.email);
+      } else {
+        alert(result.message || "Email ou mot de passe incorrect");
+      }
+    } catch(error) {
+      console.error("Erreur réseau :", error);
+      alert("Erreur de connexion au serveur")
+    }
+    
     reset();
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUserEmail("");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    reset();
   };
 
   return (
@@ -86,5 +132,3 @@ function Connexion() {
     </>
   );
 }
-
-export default Connexion;

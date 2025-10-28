@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import * as yup from "yup";
 
 import "./inscription.css";
@@ -37,6 +38,7 @@ const validationSchema = yup.object({
 type FormData = yup.InferType<typeof validationSchema>;
 
 function inscription() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -50,8 +52,9 @@ function inscription() {
     /*alert(`Bienvenue ${data.pseudo} ! votre email : ${data.email}`);*/
 
     try {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users/inscription`,
+        `${apiUrl}/api/users/inscription`,
         {
           method: "POST",
           headers: {
@@ -72,8 +75,9 @@ function inscription() {
 
       if (response.ok) {
         localStorage.setItem("token", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
         alert(`Bienvenu ${data.pseudo} !`);
-        window.location.href = "/dashboard";
+        navigate("/profil");
       } else {
         alert(result.message || "Erreur lors de l'inscription");
       }

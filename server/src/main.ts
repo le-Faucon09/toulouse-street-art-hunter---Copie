@@ -1,4 +1,5 @@
 // Load environment variables from .env file
+import dotenv from "dotenv";
 import "dotenv/config";
 
 // Check database connection
@@ -10,7 +11,7 @@ import "../database/checkConnection";
 import app from "./app";
 
 // Get the port from the environment variables
-const port = process.env.APP_PORT;
+const port = process.env.APP_PORT || 5000;
 
 // Start the server and listen on the specified port
 app

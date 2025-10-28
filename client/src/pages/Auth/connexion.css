@@ -30,6 +30,7 @@ label {
 
 input[type="email"],
 input[type="password"] {
+  color: black;
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;

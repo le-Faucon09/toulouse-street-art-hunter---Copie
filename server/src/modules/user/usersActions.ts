@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import argon2 from "argon2";
 import type { RequestHandler } from "express";
 
@@ -40,30 +41,43 @@ const read: RequestHandler = async (req, res, next) => {
 
 const login: RequestHandler = async (req, res, next) => {
   try {
-    const users = await usersRepository.readByEmailWithPassword(req.body.email);
-    if (users == null) {
-      res.sendStatus(422);
-      return;
+    const user = await usersRepository.readByEmailWithPassword(req.body.email);
+
+    if (!user) {
+      return res.status(401).json({ message: "Utilisateur non trouvé" });
     }
 
-    const verified = await argon2.verify(
-      users.password_hash,
-      req.body.password,
+    const verified = await argon2.verify(user.password_hash, req.body.password);
+
+    if (!verified) {
+      return res.status(401).json({ message: "Mot de passe incorrect" });
+    }
+
+    // ✅ Génération du token JWT
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        pseudo: user.pseudo,
+      },
+      process.env.JWT_SECRET || "secretKey", // ⚠️ mets une vraie clé secrète dans ton .env
+      { expiresIn: "2h" }
     );
 
-    if (verified) {
-      // Respond with the user in JSON format (but without the hashed password)
-      const { password_hash, ...userWithoutHashedPassword } = users;
-
-      res.json(userWithoutHashedPassword);
-    } else {
-      res.sendStatus(422);
-    }
+    // ✅ Réponse au front : token + infos utilisateur
+    res.json({
+      token,
+      user: {
+        id: user.id,
+        pseudo: user.pseudo,
+        email: user.email,
+      },
+    });
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
+
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -95,11 +109,10 @@ const hashPassword: RequestHandler = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add: RequestHandler = async (req, res, next) => {
   try {
-    // Extract the item data from the request body
-    const newUsers = {
+    const newUser = {
       email: req.body.email,
-      avatar_url: req.body.avatar_url,
-      zip_code: req.body.zip_code,
+      avatar_url: req.body.avatar_url || null,
+      zip_code: req.body.zip_code || null,
       last_name: req.body.last_name,
       first_name: req.body.first_name,
       password_hash: req.body.password_hash,
@@ -107,15 +120,33 @@ const add: RequestHandler = async (req, res, next) => {
       is_admin: req.body.is_admin ?? false,
     };
 
-    // Create the item
-    const insertId = await usersRepository.create(newUsers);
+    // Vérifie si un utilisateur existe déjà avec cet email
+    const existingUser = await usersRepository.readByEmailWithPassword(newUser.email);
+    if (existingUser) {
+      return res.status(409).json({ message: "Cet email est déjà utilisé." });
+    }
 
-    // Respond with HTTP 201 (Created) and the ID of the newly inserted item
-    res.status(201).json({ insertId });
+    // Création dans la base
+    const insertId = await usersRepository.create(newUser);
+
+    // Génère un token JWT
+    const token = jwt.sign(
+      { id: insertId, email: newUser.email, pseudo: newUser.pseudo },
+      process.env.JWT_SECRET || "secretKey",
+      { expiresIn: "2h" }
+    );
+
+    // Réponse complète au frontend
+    res.status(201).json({
+      token,
+      user: {
+        id: insertId,
+        email: newUser.email,
+        pseudo: newUser.pseudo,
+      },
+    });
   } catch (err) {
-    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
-
 export default { browse, read, add, hashPassword, login };

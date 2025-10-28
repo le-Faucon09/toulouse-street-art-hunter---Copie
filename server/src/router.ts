@@ -6,6 +6,9 @@ import discoveredActions from "./modules/discovered/discoveredActions";
 import discoveredRouter from "./modules/discovered/discoveredRouter";
 import usersActions from "./modules/user/usersActions";
 
+
+
+
 const router = express.Router();
 
 /* ************************************************************************* */
@@ -24,6 +27,7 @@ router.post(
   usersActions.hashPassword,
   usersActions.add,
 );
+router.post("/api/users/login", usersActions.login);
 
 router.get("/api/artist", artistActions.browse);
 router.get("/api/artist/:id", artistActions.read);

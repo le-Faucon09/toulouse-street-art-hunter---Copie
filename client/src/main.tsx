@@ -17,86 +17,77 @@ import Administrateur from "./pages/administrateur/Administrateur.tsx";
 import Classement from "./pages/classement";
 import Gallerie from "./pages/Gallerie.tsx";
 import Info from "./pages/Infos.tsx";
+import Profil from "./Profil.tsx";
+import ProtectedRoute from "../src/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     element: <App />,
+
     children: [
+      { path: "/", element: <Accueil />, },
+      { path: "/connexion", element: <Connexion />, },
+      { path: "/inscription", element: <Inscription />, },
+      { path: "/infos", element: <Info />, },
+      { path: "/classement", element:  <Classement /> },
+      { path: "/Cgu", element: <CGU />, },
+      { path: "/Mentions-Legales", element: <MentionsLegales />, },
+      { path: "/equipe", element: <Equipe />, },
+      { path: "/erreur", element: <Erreur />, },
+
+
       {
-        path: "/",
-        element: <Accueil />,
-      },
-       
-      {
-      path: "/Chasse",
-      element: <Chasse />
+         path: "/profil",
+         element: (
+          <ProtectedRoute>
+         <Profil />
+         </ProtectedRoute>
+         ),
       },
 
       {
         path: "/administrateur",
-        element: <Administrateur />,
-      },
-
-      {
-        path: "/Mapcomponent",
-        element: <MapComponent />,
+        element: (
+        <ProtectedRoute>
+        <Administrateur />
+        </ProtectedRoute>
+        ),
       },
 
       {
         path: "/gallerie",
-        element: <Gallerie />,
+        element: (
+        <ProtectedRoute>
+        <Gallerie />
+        </ProtectedRoute>
+        ),
       },
       {
         path: "/instructions",
-        element: <Instructions />,
+        element: (
+          <ProtectedRoute>
+        <Instructions />
+        </ProtectedRoute>
+        ),
       },
       {
         path: "/chasse",
-        element: <Chasse />,
+        element: (
+        <ProtectedRoute>
+        <Chasse />
+        </ProtectedRoute>
+        ),
       },
 
       {
         path: "/MapComponent",
-        element: <MapComponent />,
+        element: (
+          <ProtectedRoute>
+        <MapComponent />
+        </ProtectedRoute>
+        ),
       },
-      {
-        path: "/connexion",
-        element: <Connexion />,
-      },
-
-      {
-        path: "/inscription",
-        element: <Inscription />,
-      },
-
-      {
-        path: "/infos",
-        element: <Info />,
-      },
-
-      {
-        path: "/classement",
-        element: <Classement />,
-      },
-
-      {
-        path: "/Cgu",
-        element: <CGU />,
-      },
-
-      {
-        path: "/Mentions-Legales",
-        element: <MentionsLegales />,
-      },
-
-      {
-        path: "/equipe",
-        element: <Equipe />,
-      },
-      {
-        path: "/erreur",
-        element: <Erreur />,
-      },
+      
     ],
   },
 ]);

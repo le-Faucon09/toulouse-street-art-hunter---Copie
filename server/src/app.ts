@@ -2,6 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import cors from "cors";
 import express from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
@@ -9,9 +12,16 @@ const app = express();
 
 // ... (le reste inchangé)
 
-if (process.env.CLIENT_URL != null) {
-  app.use(cors({ origin: [process.env.CLIENT_URL] }));
-}
+const allowedOrigins =
+  process.env.CLIENT_URL != null && process.env.CLIENT_URL.length > 0
+    ? process.env.CLIENT_URL.split(",").map((origin) => origin.trim()).filter(Boolean)
+    : ["http://localhost:3000"];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+  }),
+);
 
 app.use(express.json());
 

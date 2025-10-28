@@ -44,6 +44,7 @@ const add: RequestHandler = async (req, res, next) => {
     const newArtist = {
       name: req.body.name,
       bio: req.body.bio,
+      avatar_url: req.body.avatar_url,
       profile_image_url: req.body.profile_image_url,
       created_at: req.body.created_at,
     };
