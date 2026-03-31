@@ -1,5 +1,5 @@
 import { useState } from "react";
-import tabsData, {TabData} from "../../data/tabsData";
+import tabsData, { TabData } from "../../data/TabsData.tsx";
 import "./MobileTabs.css";
 import Modal from "./Modal.tsx";
 
@@ -28,4 +28,3 @@ function MobileTabs() {
 }
 
 export default MobileTabs;
-

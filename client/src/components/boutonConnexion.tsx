@@ -1,13 +1,10 @@
 import { Link } from "react-router";
 
-function BoutonDesktop() {
+export default function BoutonConnexion() {
   return (
     <nav>
       <Link to={"/connexion"}>connexion</Link>
     </nav>
   );
 }
-
-export default BoutonDesktop;
-
 //création d'un composent bouton de connexion

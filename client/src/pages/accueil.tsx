@@ -10,10 +10,7 @@ const navigate = useNavigate();
   function handleClick() {
     setStarted(true);
     setFade(true);
-    setTimeout(() => {
-      navigate("/chasse");
-    }, 800)
-
+    
     setTimeout(() => {
       navigate("/chasse");
     }, 4000);

@@ -5,7 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 // Import database client
-import database from "../database/client";
+import database from "../database/Client";
 
 import type { AbstractSeeder } from "../database/fixtures/AbstractSeeder";
 

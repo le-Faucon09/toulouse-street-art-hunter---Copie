@@ -4,9 +4,9 @@ import { faker } from "@faker-js/faker";
 import type { Faker } from "@faker-js/faker";
 
 // Import database client
-import database from "../client";
+import database from "../Client";
 
-import type { Result } from "../client";
+import type { Result } from "../Client";
 
 // Declare an object to store created objects from their names
 type Ref = object & { insertId: number };

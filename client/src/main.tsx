@@ -5,7 +5,7 @@ import "./assets/styles/global.css";
 import App from "./App";
 import Connexion from "./pages/Auth/Connexion.tsx";
 import Inscription from "./pages/Auth/inscription.tsx";
-import CGU from "./pages/Cgu";
+import CGU from "./pages/Cgu/Cgu.tsx";
 import Chasse from "./pages/Chasse";
 import Equipe from "./pages/Equipe";
 import Erreur from "./pages/Erreur";
@@ -14,10 +14,10 @@ import MapComponent from "./pages/MapComponent";
 import MentionsLegales from "./pages/MentionsLegales";
 import Accueil from "./pages/Accueil.tsx";
 import Administrateur from "./pages/administrateur/Administrateur.tsx";
-import Classement from "./pages/classement";
+import Classement from "./pages/Classement.tsx";
 import Gallerie from "./pages/Gallerie.tsx";
 import Info from "./pages/Infos.tsx";
-import Profil from "./Profil.tsx";
+import Profil from "./pages/Profil.tsx";
 import ProtectedRoute from "../src/ProtectedRoute";
 
 const router = createBrowserRouter([

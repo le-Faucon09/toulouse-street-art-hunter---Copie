@@ -1,7 +1,8 @@
-import "./FooterComponent.css";
 import { Link } from "react-router";
 
-function Footer() {
+import "./Footer.css";
+
+export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
@@ -21,5 +22,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import tabsData, {TabData} from "../../data/tabsData.tsx";
+import tabsData, { TabData } from "../../data/TabsData.tsx";
 import "./DesktopTabs.css";
 import Modal from "./Modal.tsx";
 
@@ -22,7 +22,7 @@ function DesktopTabs() {
           </div>
         </button>
       ))}
-      
+
       {selectedTabId !== null && (
         <Modal tabId={selectedTabId} onClose={() => setSelectedTabId(null)} />
       )}

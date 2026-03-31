@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-function BoutonAccueil() {
+export default function BoutonAccueil() {
   const navigate = useNavigate();
 
   function handleclick() {
@@ -20,5 +20,3 @@ function BoutonAccueil() {
     </button>
   );
 }
-
-export default BoutonAccueil;

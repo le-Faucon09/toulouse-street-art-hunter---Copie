@@ -1,6 +1,6 @@
-import type { Result, Rows } from "../../../database/client";
+import type { Result, Rows } from "../../../database/Client";
 
-import databaseClient from "../../../database/client";
+import databaseClient from "../../../database/Client";
 
 type score = {
   id: number;

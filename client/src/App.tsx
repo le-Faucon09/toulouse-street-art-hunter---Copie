@@ -1,19 +1,18 @@
 import "./assets/styles/global.css";
 import { Outlet } from "react-router";
-import Footer from "./components/FooterComponent.tsx";
-import Navigation from "./components/navigation.tsx";
+import Footer from "./components/Footer/Footer.tsx";
+import Navigation from "./components/Navigation.tsx";
 
 function App() {
   return (
     <>
-        <Navigation/>
+      <Navigation />
 
-        <Outlet />
+      <Outlet />
 
-        <Footer />
+      <Footer />
     </>
   );
 }
 
 export default App;
-

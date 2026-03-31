@@ -1,6 +1,6 @@
 import path from "node:path";
 import type { Request, Response } from "express";
-import { upload } from "../../middlewares/uploads"; // 👍 utile si utilisé dans ta route
+import { upload } from "../../middlewares/Uploads"; // 👍 utile si utilisé dans ta route
 import discoveredRepository from "../discovered/discoveredRepository"; // ✅ Import par défaut
 
 export const createDiscovered = async (

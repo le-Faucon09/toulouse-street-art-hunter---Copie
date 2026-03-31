@@ -36,3 +36,17 @@
     }
   }
 }
+
+.btn-deconnexion {
+  margin-left: 1400px;
+  
+  padding: .4rem .75rem;
+  border-radius: 20rem;
+  border: 1px solid #3f1c1c;
+  background: linear-gradient(90deg,  #ff0066, #ffcc00);
+  cursor: pointer;
+}
+
+.logout-icon {
+  height: 26px;
+}

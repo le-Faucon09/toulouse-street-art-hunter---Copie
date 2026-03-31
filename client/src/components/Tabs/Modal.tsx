@@ -1,6 +1,6 @@
 import "./Modal.css";
 import { createPortal } from "react-dom";
-import tabsData from "../../data/tabsData";
+import tabsData from "../../data/TabsData";
 import TabArtistContain from "./TabsContain/TabArtistContain";
 import TabUserContain from "./TabsContain/TabUserContain";
 

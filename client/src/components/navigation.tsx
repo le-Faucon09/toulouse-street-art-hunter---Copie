@@ -1,14 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
-import BoutonAccueil from "./boutonAccueil.tsx";
+import { Link, useNavigate } from "react-router";
+import BoutonAccueil from "./BoutonAccueil/BoutonAccueil";
+import logoutIcon from "../../public/icon/right-from-bracket-solid.svg";
 // import "../assets/styles/burger.css";
 import "./navigation.css";
 
-function Navigation() {
+export default function Navigation() {
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [fermeture, setFermeture] = useState(false);
+  const navigate = useNavigate();
+
   const menuRef = useRef<HTMLElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  const handlelogout = () => {
+    localStorage.clear();
+
+    navigate("/connexion");
+  };
 
   useEffect(() => {
     const fermetureAvecAnimation = () => {
@@ -111,7 +120,7 @@ function Navigation() {
                 }}
                 to="/infos"
               >
-              informations
+                informations
               </Link>
             </li>
             <li>
@@ -139,6 +148,13 @@ function Navigation() {
           </ul>
         )}
         <button
+          type="button"
+          className="btn-deconnexion"
+          onClick={handlelogout} // déclenche la déconnexion
+        >
+          <img src={logoutIcon} alt="logo-logout" className="logout-icon" />
+        </button>
+        <button
           ref={btnRef}
           type="button"
           className="floating-btn"
@@ -162,5 +178,3 @@ function Navigation() {
     </>
   );
 }
-
-export default Navigation;

@@ -1,5 +1,5 @@
 import type { ResultSetHeader, RowDataPacket } from "mysql2";
-import databaseClient from "../../../database/client";
+import databaseClient from "../../../database/Client";
 
 // Définition locale du type Artwork
 type Artwork = {

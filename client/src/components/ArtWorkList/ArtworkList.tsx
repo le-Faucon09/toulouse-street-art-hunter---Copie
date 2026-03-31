@@ -1,6 +1,6 @@
-import type { Artwork } from "../data/mockArtworks";
-import { mockArtworks } from "../data/mockArtworks";
-import ArtworkCard from "./ArtworkCard";
+import type { Artwork } from "../../data/MockArtworks";
+import { mockArtworks } from "../../data/MockArtworks";
+import ArtworkCard from "../ArtworkCard/ArtworkCard";
 
 type Props = {
   userLatitude: number;
@@ -28,20 +28,20 @@ function getDistanceInKm(
 }
 
 export default function ArtworkList({ userLatitude, userLongitude }: Props) {
-    const artworksWithDistance = mockArtworks.map((artwork: Artwork) => {
+  const artworksWithDistance = mockArtworks.map((artwork: Artwork) => {
     const distance = getDistanceInKm(
       userLatitude,
       userLongitude,
       artwork.latitude,
       artwork.longitude,
     );
-    
-    return {...artwork,  distance };
+
+    return { ...artwork, distance };
   });
 
   const nearbyArtworks = artworksWithDistance
-  .filter((art) => art.distance <=30)
-  .sort((a, b) => a.distance - b.distance);
+    .filter((art) => art.distance <= 30)
+    .sort((a, b) => a.distance - b.distance);
 
   return (
     <div className="artwork-list">

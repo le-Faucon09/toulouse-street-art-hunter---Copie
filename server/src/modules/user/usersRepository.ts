@@ -1,6 +1,6 @@
-import databaseClient from "../../../database/client";
+import databaseClient from "../../../database/Client";
 
-import type { Result, Rows } from "../../../database/client";
+import type { Result, Rows } from "../../../database/Client";
 
 type User = {
   id: number;

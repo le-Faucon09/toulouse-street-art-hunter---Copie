@@ -2,7 +2,7 @@ import L from "leaflet";
 import { useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import ArtworkList from "../components/ArtworkList";
+import ArtworkList from "../components/ArtWorkList/ArtworkList";
 import ChangeMapView from "../pages/ChangeMapView";
 import "../pages/MapComponent.css";
 
@@ -23,9 +23,9 @@ export default function MapComponent() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [showNearbyArtworks, setShowNearbyArtworks] = useState(false);
-  const [artworks, setArtworks] = useState< 
-  { id: number; name: string; lat: number; lon: number }[]
-   >([]);
+  const [artworks, setArtworks] = useState<
+    { id: number; name: string; lat: number; lon: number }[]
+  >([]);
   const handleGeolocation = () => {
     if (navigator.geolocation) {
       setLoading(true);
@@ -81,7 +81,11 @@ export default function MapComponent() {
 
             {/* 👇 Ici les marqueurs d'œuvres */}
             {artworks.map((art) => (
-              <Marker key={art.id} position={[art.lat, art.lon]} icon={defaultIcon}>
+              <Marker
+                key={art.id}
+                position={[art.lat, art.lon]}
+                icon={defaultIcon}
+              >
                 <Popup>
                   <strong>{art.name}</strong>
                 </Popup>

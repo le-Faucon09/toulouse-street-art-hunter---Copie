@@ -1,4 +1,4 @@
-import client from "./client";
+import client from "./Client";
 
 // Try to get a connection to the database
 client

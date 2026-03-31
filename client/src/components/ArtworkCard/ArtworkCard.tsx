@@ -1,4 +1,4 @@
-import type { Artwork } from "../data/mockArtworks";
+import type { Artwork } from "../../../src/data/MockArtworks";
 import "./ArtworkCard.css";
 
 type Props = {

@@ -5,9 +5,9 @@ import supertest from "supertest";
 import app from "../../src/app";
 
 // Import databaseClient
-import databaseClient from "../../database/client";
+import databaseClient from "../../database/Client";
 
-import type { Result, Rows } from "../../database/client";
+import type { Result, Rows } from "../../database/Client";
 
 // Restore all mocked functions after each test
 afterEach(() => {
